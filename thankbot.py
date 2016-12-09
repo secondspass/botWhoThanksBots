@@ -10,12 +10,14 @@ make a comment more than once every 10 minutes.
 import praw
 import time
 
-botlist = ['RemindMeBot', 'AutoModerator', 'samacharbot2']
+botlist = ['RemindMeBot', 'AutoModerator', 'TotesMessenger', 'samacharbot2']
 replied_comments = {}
 comment_string = """
 Thank you {}!
 
 ----
+^(Because bots deserve gratitude.
+[Report an issue](https://github.com/dragsubil/botWhoThanksBots/issues))
 
 """
 
@@ -28,7 +30,7 @@ def post_reply(botname, submission):
         submission.reply(comment_string.format(botname))
         replied_comments[submission.id] = True
         print("Thanked {}. id: {}".format(botname, submission.id))
-        print("waiting 10 minutes because reddit doesn't want spam :)")
+        print("waiting 10 minutes because reddit doesn't want spam")
         time.sleep(360)
 
 
