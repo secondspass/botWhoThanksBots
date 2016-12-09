@@ -17,7 +17,8 @@ Thank you {}!
 
 ----
 ^(Because bots deserve gratitude.
-[Report an issue](https://github.com/dragsubil/botWhoThanksBots/issues))
+[Report an issue](https://github.com/dragsubil/botWhoThanksBots/issues)
+).
 
 """
 
