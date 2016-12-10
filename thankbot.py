@@ -16,28 +16,30 @@ comment_string = """
 Thank you {}!
 
 ----
-^(Because bots deserve gratitude.
+^(Because bots deserve gratitude.)
 [Report an issue](https://github.com/dragsubil/botWhoThanksBots/issues)
-).
 
 """
 
 
-def post_reply(botname, submission):
+def post_reply(botname, comment):
     try:
-        if replied_comments[submission.id]:
+        if replied_comments[comment.id]: 
             return
     except KeyError:
-        submission.reply(comment_string.format(botname))
-        replied_comments[submission.id] = True
-        print("Thanked {}. id: {}".format(botname, submission.id))
-        print("waiting 10 minutes because reddit doesn't want spam")
-        time.sleep(360)
+        try:
+            comment.reply(comment_string.format(botname))
+        except Exception as e:
+            print("Moving to the next bot because exception occured:", str(e))
+            return
+            
+        replied_comments[comment.id] = True
+        print("Thanked {}. id: {}".format(botname, comment.id))
 
 
 def thank_the_bots():
-    reddit = praw.Reddit('thankerbot')
     for botname in botlist:
+        reddit = praw.Reddit('thankerbot')
         bot_object = reddit.redditor(botname)
         # bot_new_submissions includes posts and comments
         bot_new_submissions = bot_object.new(limit=1)
@@ -45,6 +47,8 @@ def thank_the_bots():
             print("retrieving next comment")
             if isinstance(submission, praw.models.reddit.comment.Comment):
                 post_reply(botname, submission)
+                print("waiting 10 minutes because reddit doesn't want spam")
+                time.sleep(600)
 
 
 if __name__ == '__main__':
