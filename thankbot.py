@@ -10,8 +10,8 @@ make a comment more than once every 10 minutes.
 import praw
 import time
 
-botlist = ['RemindMeBot', 'AutoModerator', 'TotesMessenger', 'samacharbot2'
-           'TweetsInCommentsBot'
+botlist = ['TweetsInCommentsBot', 'samacharbot2', 'remindmebot',
+           'automoderator', 'totesmessenger'
            ]
 replied_comments = {}
 comment_string = """
