@@ -1,5 +1,5 @@
 *.swp
 praw.ini
 activate
-
+[#]*[#]
 
